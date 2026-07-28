@@ -8,12 +8,12 @@ const CONFIG = {
     kraft: '#E8D7BF'
   },
   images: [
-    'assets/photo1.jpg',
-    'assets/photo2.jpg',
-    'assets/photo3.jpg',
-    'assets/photo4.jpg',
-    'assets/photo5.jpg', // placeholders for images you will add
-    'assets/photo6.jpg'
+    './0D4718F8-E876-494D-AD1C-3296E13E77A7.jpeg',
+    './20756774-4036-4C4C-946F-56B2F821B111.jpeg',
+    './55BB6ED3-1752-4982-B44E-CC899441F4B6.jpeg',
+    './5EBC3313-A229-42DC-ACB6-5C60DB7160B6.jpeg',
+    './90C7EAFC-7B23-4E5D-A270-155594B38FFD.jpeg',
+    './A69E6CBE-E279-4FDA-BA80-72A4455A133A.jpeg'
   ],
   chapter3: [
     "Your smile.","The way your laugh makes me smile too.","How excited you get over small things, like seeing a cute animal.","Your love for sunflowers.","How easy it is to talk to you.","The way you always make me feel at home.","Your kindness towards other people.","Your beautiful, sky-blue eyes.","How you make even ordinary days feel exciting.","The way you care so deeply.","Your sense of humour (hehe you're funny).","The way we can be completely silly together.","Your passionate and incredible kisses.","Your delicate touch.","How thoughtful you are.","The way you encourage me.","Your determination.","Your hugs.","The way you make me feel calm.","The way you can always make me laugh.","How cute you are (buuuuug)","You always brighten my day.","The memories we've already made.","How safe I feel being myself around you.","That I never have to pretend around you.","All the fun we have together.","Your beautiful heart.","The fact that you chose me.","Your creativity.","Your beauty. You are the most beautiful soul I have ever met, my love."
