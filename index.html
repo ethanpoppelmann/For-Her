@@ -35,6 +35,13 @@
         <button id="playMusic" class="music-btn">▶ Play music</button>
         <a id="youtubeLink" href="https://www.youtube.com/watch?v=bjjc59FgUpg" target="_blank" rel="noopener" class="yt-link">Open on YouTube</a>
       </div>
+
+      <!-- YouTube iframe placeholder -->
+      <div id="yt-container" class="yt-container" aria-hidden="true" style="position:absolute;left:1.5rem;top:1.5rem;z-index:40;display:none">
+        <div id="yt-player"></div>
+        <button id="ytClose" style="margin-top:0.4rem;padding:0.4rem 0.6rem;border-radius:6px;border:0;cursor:pointer">Close</button>
+      </div>
+
     </header>
 
     <main id="scrapbook" class="scrapbook" hidden>
@@ -63,11 +70,13 @@
       </div>
     </footer>
 
-    <!-- Hidden audio: we embed a YouTube link as an iFrame player optional (user can play). We also provide a fallback audio element for hosted MP3s. -->
+    <!-- Hidden audio: we embed a YouTube player when requested. We also provide a fallback audio element for hosted MP3s. -->
     <audio id="bgAudio" loop crossorigin="anonymous" style="display:none"></audio>
 
   </div>
 
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>

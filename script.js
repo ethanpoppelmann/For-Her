@@ -21,6 +21,16 @@ const CONFIG = {
   letter: `My Dearest Sofia,\n\nI’m writing (typing, something like that) this with the sound of a distant train on the tracks echoing in my mind, and I’m right back there, heart hammering against my ribs, sweating against the itchy seat. That journey to meet you for the first time. Every mile of track felt like an eternity, and yet, it was the most beautiful and yet most nerve-wracking trip of my life.\n\nBefore I knew it, I was at the station, and then, there you were. The whole world fell away. That first hug wasn't just an embrace, it felt like I was finally home. In that single moment, the noise of the station became the quietest, most perfect soundtrack of my life.\n\nBeing with you for the first time, it felt like discovering a whole new exciting world (something for you I would imagine is like meeting a kitty and getting to pet it). It was the most natural, exhilarating, and calming thing I had ever experienced. You were this girl who felt more like home than any place I’d ever lived.\n\nIn you, I have found my best friend, my greatest adventure, and my deepest peace. I am so endlessly, breathtakingly grateful for the person you are. Thank you for getting on that train with me that day, it's been the best choice I've ever made, and I cannot thank you enough for telling me you like my glasses. \n\nMy heart belongs to you, completely and forever.\n\nWith all my love and every dream I have, Happy Girlfriend Day, my most precious girlfriend (and, soon, wife)\n\nYours always. ⭐`
 };
 
+// YouTube player state
+let ytPlayer = null;
+let ytReady = false;
+const YT_VIDEO_ID = 'bjjc59FgUpg';
+
+function onYouTubeIframeAPIReady(){
+  // will be created when the user opens the player to avoid autoplay restrictions
+  ytReady = true;
+}
+
 // App state
 let chapter = 0; // 0..4 (5 chapters)
 const TITLE = 'Happy International Girlfriend Day';
@@ -34,6 +44,8 @@ const nextBtn = document.getElementById('next');
 const ending = document.getElementById('ending');
 const bgAudio = document.getElementById('bgAudio');
 const playMusicBtn = document.getElementById('playMusic');
+const ytContainer = document.getElementById('yt-container');
+const ytClose = document.getElementById('ytClose');
 
 // simple typed title
 function typeTitle(text, el, speed=80){
@@ -72,6 +84,7 @@ setInterval(tickPetals,16);
 // sunflower petals generator (SVG)
 function drawSunPetals(stage){
   const petalsG = document.getElementById('petals');
+  if(!petalsG) return;
   petalsG.innerHTML = '';
   const count = 12 + stage*6; // more petals as stage increases
   for(let i=0;i<count;i++){
@@ -89,6 +102,7 @@ function drawSunPetals(stage){
 // create simple LP fill (fallback)
 (function createDefs(){
   const svg = document.getElementById('sunflower');
+  if(!svg) return;
   const ns = 'http://www.w3.org/2000/svg';
   const defs = document.createElementNS(ns,'defs');
   const g = document.createElementNS(ns,'linearGradient'); g.id='lp'; g.setAttribute('x1','0'); g.setAttribute('x2','1');
@@ -104,12 +118,12 @@ function renderChapter(idx){
   drawSunPetals(Math.min(4,idx));
   // seedling scale based on idx
   const flower = document.getElementById('flower');
-  flower.style.transform = `translate(100px,${60 - idx*6}px) scale(${0.6 + idx*0.12})`;
+  if(flower) flower.style.transform = `translate(100px,${60 - idx*6}px) scale(${0.6 + idx*0.12})`;
 
   if(idx===0){ // chapter 1: chat bubble
     const el = document.createElement('div'); el.className='chat';
-    const m1 = document.createElement('div'); m1.className='bubble.her'; m1.textContent = 'I really like your glasses!'; m1.style.opacity=0; el.appendChild(m1);
-    const m2 = document.createElement('div'); m2.className='bubble.you'; m2.textContent = "Every story starts somewhere. Ours started with a message. And I never imagined where that message would lead."; m2.style.opacity=0; el.appendChild(m2);
+    const m1 = document.createElement('div'); m1.className='bubble her'; m1.textContent = 'I really like your glasses!'; m1.style.opacity=0; el.appendChild(m1);
+    const m2 = document.createElement('div'); m2.className='bubble you'; m2.textContent = "Every story starts somewhere. Ours started with a message. And I never imagined where that message would lead."; m2.style.opacity=0; el.appendChild(m2);
     pageEl.appendChild(el);
     // reveal messages one by one
     setTimeout(()=>m1.style.opacity=1,400);
@@ -117,11 +131,11 @@ function renderChapter(idx){
   } else if(idx===1){ // chapter 2: album
     const h=document.createElement('h2'); h.textContent='Finally Meeting'; pageEl.appendChild(h);
     const album = document.createElement('div'); album.className='album';
-    CONFIG.images.slice(0,4).forEach((src,i)=>{
+    CONFIG.images.slice(0,6).forEach((src,i)=>{
       const p=document.createElement('div'); p.className='photo';
       const img=document.createElement('img'); img.src=src; img.alt=`Photo ${i+1}`; p.appendChild(img);
       const tape=document.createElement('div'); tape.className='tape'; p.appendChild(tape);
-      const cap=document.createElement('div'); cap.className='caption-hand'; cap.textContent = ['First meet','That day','Cuddles','Late night'][i] || '';
+      const cap=document.createElement('div'); cap.className='caption-hand'; cap.textContent = ['First meet','That day','Cuddles','Late night','Train trip','Sweet selfie'][i] || '';
       p.appendChild(cap);
       album.appendChild(p);
     });
@@ -167,12 +181,36 @@ prevBtn.addEventListener('click', ()=>{ if(chapter>0){ chapter--; renderChapter(
   scrapbook.hidden=true; intro.hidden=false; }
 });
 
-// music controls: we cannot include YouTube audio directly as an mp3; provide play button that opens youtube in new tab or uses bgAudio if provided.
+// YouTube embed + controls
 playMusicBtn.addEventListener('click', ()=>{
-  // try playing local audio if user added one
-  if(bgAudio.src){ bgAudio.play().catch(()=>alert('Browser blocked autoplay; please click the YouTube link to play the song.')); }
-  else{ window.open('https://www.youtube.com/watch?v=bjjc59FgUpg','_blank'); }
+  // If a hosted audio exists, play it; otherwise create/show YouTube iframe player
+  if(bgAudio.src){ bgAudio.play().catch(()=>alert('Browser blocked autoplay; please interact with the page to start audio.')); return; }
+
+  // show container
+  ytContainer.style.display='block'; ytContainer.setAttribute('aria-hidden','false');
+  if(!ytPlayer && ytReady){
+    ytPlayer = new YT.Player('yt-player', {
+      height: '180', width: '320', videoId: YT_VIDEO_ID,
+      playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 },
+      events: { 'onReady': (e)=>{ e.target.playVideo(); playMusicBtn.textContent='⏸ Pause music'; }, 'onStateChange': onPlayerStateChange }
+    });
+  } else if(ytPlayer){
+    const state = ytPlayer.getPlayerState();
+    if(state===YT.PlayerState.PLAYING) { ytPlayer.pauseVideo(); playMusicBtn.textContent='▶ Play music'; }
+    else { ytPlayer.playVideo(); playMusicBtn.textContent='⏸ Pause music'; }
+  }
 });
+
+ytClose.addEventListener('click', ()=>{
+  if(ytPlayer) ytPlayer.pauseVideo();
+  ytContainer.style.display='none'; ytContainer.setAttribute('aria-hidden','true');
+  playMusicBtn.textContent='▶ Play music';
+});
+
+function onPlayerStateChange(e){
+  if(e.data===YT.PlayerState.ENDED) playMusicBtn.textContent='▶ Play music';
+  if(e.data===YT.PlayerState.PLAYING) playMusicBtn.textContent='⏸ Pause music';
+}
 
 // initial type animation and petal airflow start
 typeTitle(TITLE, introTitleEl, 70);
