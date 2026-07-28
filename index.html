@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Story — Happy International Girlfriend Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Patrick+Hand&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+    <header class="intro" id="intro">
+      <div class="sky"></div>
+      <div class="center">
+        <h1 id="typedTitle" class="title" aria-live="polite"></h1>
+        <p class="subtitle">For the girl who turned messages into memories.</p>
+        <button id="sunflowerBtn" class="sunflower-btn" aria-label="Open scrapbook">
+          <!-- sunflower SVG, will grow across chapters -->
+          <svg id="sunflower" viewBox="0 0 200 200" width="160" height="160" role="img" aria-label="Sunflower">
+            <g id="stem" transform="translate(100,140)">
+              <rect x="-4" y="0" width="8" height="60" fill="#7DA66C"></rect>
+            </g>
+            <g id="flower" transform="translate(100,60)">
+              <circle id="disk" cx="0" cy="0" r="22" fill="#3b2a17"></circle>
+              <g id="petals"></g>
+            </g>
+          </svg>
+        </button>
+        <div class="open-hint">Click the sunflower to open the scrapbook</div>
+      </div>
+      <div class="controls-top">
+        <button id="playMusic" class="music-btn">▶ Play music</button>
+        <a id="youtubeLink" href="https://www.youtube.com/watch?v=bjjc59FgUpg" target="_blank" rel="noopener" class="yt-link">Open on YouTube</a>
+      </div>
+    </header>
+
+    <main id="scrapbook" class="scrapbook" hidden>
+      <div class="book">
+        <div id="page" class="page">
+          <!-- Pages will be injected here -->
+        </div>
+
+        <div class="nav">
+          <button id="prev" aria-label="Previous">◀ Prev</button>
+          <button id="next" aria-label="Next">Next ▶</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="ending" id="ending" hidden>
+      <div class="desk">
+        <div class="cover">Our Story</div>
+        <div class="final-text">
+          <div class="lines">
+            <div>Happy International Girlfriend Day</div>
+            <div>I love you.</div>
+            <div>See you soon! ❤️</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Hidden audio: we embed a YouTube link as an iFrame player optional (user can play). We also provide a fallback audio element for hosted MP3s. -->
+    <audio id="bgAudio" loop crossorigin="anonymous" style="display:none"></audio>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
