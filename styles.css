@@ -55,20 +55,21 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial
 /* Future decorations */
 .future-deco{display:flex;gap:1rem;align-items:center;margin-top:1rem}
 .future-sunflower{filter:drop-shadow(0 6px 6px rgba(0,0,0,0.08));transform-origin:center;animation:bob 6s ease-in-out infinite}
-.future-cat{opacity:0.95;transform-origin:center;animation:float 5s ease-in-out infinite}
-.future-bug{animation:wiggle 3s linear infinite}
 .ticket{background:#fffaf0;padding:0.4rem 0.6rem;border-radius:6px;border:1px dashed rgba(0,0,0,0.06);font-family:Inter;font-size:0.9rem}
 
 @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px) rotate(-2deg)}100%{transform:translateY(0)}}
 @keyframes wiggle{0%{transform:rotate(0)}25%{transform:rotate(12deg)}50%{transform:rotate(0)}75%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
 
-/* Ending */
-.ending{display:flex;justify-content:center;align-items:center;padding:3rem}
-.desk{width:700px;max-width:92vw;background:linear-gradient(180deg,#8b5e32,#6e4a2a);padding:2rem;border-radius:12px;color:#fff;position:relative}
-.cover{position:absolute;left:40px;top:28px;background:var(--paper);color:var(--text);padding:0.8rem 1rem;border-radius:6px;font-weight:600}
-.final-text{padding-top:2rem}
-.lines{font-family:Patrick Hand;font-size:1.3rem;display:flex;flex-direction:column;gap:0.6rem}
+/* Ending: center the final message inside the brown desk box */ .desk { width: 700px; max-width: 92vw; background: linear-gradient(180deg,#8b5e32,#6e4a2a); padding: 2rem; border-radius: 12px; color: #fff; position: relative; box-shadow: 0 12px 30px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 200px; }
+
+/* Hide the old decorative cover so it doesn't sit on top */ .desk .cover { display: none !important; }
+
+/* Styling for the centered text */ .final-text { padding: 0; margin: 0; } .final-text .lines { font-family: "Patrick Hand", Patrick Hand, cursive; font-size: 1.3rem; line-height: 1.4; display: flex; flex-direction: column; gap: 0.4rem; align-items: center; justify-content: center; text-align: center; }
+
+/* Big celebratory heading inside the box */ .final-text .big { font-family: "Great Vibes", cursive; font-size: clamp(1.6rem, 4.8vw, 2.8rem); margin: 0; color: #fff; letter-spacing: 0.6px; }
+
+/* small adjustments for mobile */ @media (max-width:520px) { .desk { padding: 1rem; min-height: 160px; } .final-text .lines { font-size: 1.05rem; } .final-text .big { font-size: 1.8rem; } }
 
 /* responsive tweaks */
 @media (max-width:700px){.list-scrap{columns:1}.photo{width:100%}.future-deco{flex-wrap:wrap;justify-content:center}}
