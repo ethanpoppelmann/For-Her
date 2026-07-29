@@ -1,10 +1,4 @@
-/* Color palette
-   Sky Blue: #8DCFF4
-   Sunflower Yellow: #F6C445
-   Warm Paper: #FFF8F0
-   Sage Green: #7DA66C
-   Kraft Paper: #E8D7BF
-*/
+/* styles.css (replace entire file) */
 :root{
   --sky:#8DCFF4;
   --sun:#F6C445;
@@ -15,10 +9,10 @@
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:var(--text);background:linear-gradient(#cfeffd, #eaf7ff)}
-#app{min-height:100vh;display:flex;flex-direction:column}
+#app{min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:2}
 
 /* Intro */
-.intro{position:relative;display:flex;align-items:center;justify-content:center;padding:3rem}
+.intro{position:relative;display:flex;align-items:center;justify-content:center;padding:3rem;z-index:5}
 .intro .center{text-align:center;z-index:20}
 .title{font-family:Great Vibes,cursive;font-size:clamp(2rem,6vw,4rem);color:var(--sun);margin:0}
 .subtitle{font-family:Patrick Hand, 'Patrick Hand', cursive;margin-top:0.5rem;background:rgba(255,248,240,0.9);display:inline-block;padding:0.4rem 0.8rem;border-radius:8px;color:#333}
@@ -28,10 +22,13 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial
 .music-btn{background:var(--kraft);border:0;padding:0.5rem 0.7rem;border-radius:8px;cursor:pointer}
 .yt-link{background:rgba(0,0,0,0.06);padding:0.5rem 0.7rem;border-radius:8px;text-decoration:none;color:inherit}
 
+/* Petals canvas sits behind content so it won't block the white book area */
+#petal-canvas{position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:1;pointer-events:none}
+
 /* Scrapbook */
 .scrapbook{padding:2rem;display:flex;justify-content:center}
-.book{width:900px;max-width:96vw;position:relative}
-.page{background:linear-gradient(180deg,var(--paper),#fff);box-shadow:0 12px 38px rgba(0,0,0,0.15);border-radius:12px;padding:2rem;min-height:560px;transform-origin:center;transition:transform .9s ease, opacity .6s ease}
+.book{width:900px;max-width:96vw;position:relative;z-index:10}
+.page{background:linear-gradient(180deg,var(--paper),#fff);box-shadow:0 12px 38px rgba(0,0,0,0.15);border-radius:12px;padding:2rem;min-height:560px;transform-origin:center;transition:transform .9s ease, opacity .6s ease;z-index:12}
 .page.turn{transform:rotateY(-160deg) translateZ(0)}
 .page.close{transform:scale(.985) translateY(6px);opacity:0.98}
 .nav{display:flex;justify-content:space-between;margin-top:1rem}
