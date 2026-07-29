@@ -186,18 +186,7 @@ function renderChapter(idx){
         <g transform="translate(60,60)">
           <circle r="20" fill="#5b3a1a" />
           ${Array.from({length:12}).map((_,i)=>`<ellipse rx="8" ry="20" fill="${i%2? '#F6C445':'#F3B63A'}" transform="rotate(${i*30}) translate(0,-34)"/>`).join('')}
-        </g>
-      </svg>
-      <svg class="future-cat" viewBox="0 0 120 80" width="96" height="64" aria-hidden="true">
-        <g fill="#f5d2b0">
-          <ellipse cx="60" cy="50" rx="34" ry="18"/>
-          <circle cx="44" cy="40" r="8"/>
-          <circle cx="76" cy="40" r="8"/>
-          <path d="M36 28 q-6 -8 -12 -8 q6 8 12 8z" fill="#f5d2b0" />
-        </g>
-      </svg>
-      <svg class="future-bug" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><g><ellipse cx="16" cy="16" rx="7" ry="6" fill="#d9534f"/><line x1="16" y1="9" x2="16" y2="23" stroke="#000"/></g></svg>
-      <div class="ticket">Train ticket • 12/12/2026 • Carriage 3</div>
+      <div class="ticket">Train ticket • 03/07/2026 • Carriage 3</div>
     `;
     pageEl.appendChild(deco);
 
