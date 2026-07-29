@@ -187,7 +187,7 @@ function renderChapter(idx){
     const deco = document.createElement('div'); deco.className='future-deco';
     deco.innerHTML = `
       ${buildFutureSunflower({width:120, height:120, includeStem:false, idPrefix:'future-'})}
-      <div class="ticket">Train ticket • 12/12/2026 • Carriage 3</div>
+      <div class="ticket">Train ticket • 03/07/2026 • Carriage 3</div>
     `;
     pageEl.appendChild(deco);
 
