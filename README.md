@@ -35,3 +35,4 @@ Next steps I can take for you (choose one):
 - Tweak animations, fonts, or the page-turn effect.
 
 I committed these files to branch: girlfriend-day
+// rebuild trigger
